@@ -1,25 +1,12 @@
-from fastapi import FastAPI
-from app.api.routes import router
-from app.core.logging_config import logger
- 
+from app.core.database import initialize_database, insert_test_data
 
- 
-# Create the FastAPI application
-app = FastAPI(
-    title=" FastAPI Service",
-    description="A service for checking leap year or a prime number.",
-    version="1.0.0",
-    #openapi_tags=tags_metadata,
-    contact={
-        "name": "Development Team",
-        "email": "support@example.com",
-    },
-)
- 
-# Include the API routes
-app.include_router(router)
- 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
- 
+    print("Initializing database...")
+    initialize_database()
+    
+    print("Inserting test data...")
+    insert_test_data()
+    
+    print("Process completed. Verify data using:")
+    print("1. SQLite Viewer extension in VSCode")
+    print("2. Or run: python verify_data.py")
